@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMe.Auth.Web", "ServiceMe.Auth.Web\ServiceMe.Auth.Web.csproj", "{86DDFE10-4CEA-4936-B4AD-188DE20FCB50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMe.Auth.Domain", "ServiceMe.Auth.Domain\ServiceMe.Auth.Domain.csproj", "{9D50DA92-EE25-4253-B9FA-DB2C2ADABC00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMe.Auth.Infrastructure.Persistence", "ServiceMe.Auth.Infrastructure.Persistence\ServiceMe.Auth.Infrastructure.Persistence.csproj", "{7D73B979-BD70-4389-994E-CA7A3919660D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMe.Auth.Infrastructure.MongoDb", "ServiceMe.Auth.Infrastructure.MongoDb\ServiceMe.Auth.Infrastructure.MongoDb.csproj", "{A34AFAD4-71AC-45C5-A16A-514B5FF84C97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMe.Auth.Application", "ServiceMe.Auth.Application\ServiceMe.Auth.Application.csproj", "{0C10DCE1-CE55-4CB0-8F95-00F9058C9613}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86DDFE10-4CEA-4936-B4AD-188DE20FCB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DDFE10-4CEA-4936-B4AD-188DE20FCB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DDFE10-4CEA-4936-B4AD-188DE20FCB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DDFE10-4CEA-4936-B4AD-188DE20FCB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D50DA92-EE25-4253-B9FA-DB2C2ADABC00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D50DA92-EE25-4253-B9FA-DB2C2ADABC00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D50DA92-EE25-4253-B9FA-DB2C2ADABC00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D50DA92-EE25-4253-B9FA-DB2C2ADABC00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D73B979-BD70-4389-994E-CA7A3919660D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D73B979-BD70-4389-994E-CA7A3919660D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D73B979-BD70-4389-994E-CA7A3919660D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D73B979-BD70-4389-994E-CA7A3919660D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A34AFAD4-71AC-45C5-A16A-514B5FF84C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A34AFAD4-71AC-45C5-A16A-514B5FF84C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A34AFAD4-71AC-45C5-A16A-514B5FF84C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A34AFAD4-71AC-45C5-A16A-514B5FF84C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C10DCE1-CE55-4CB0-8F95-00F9058C9613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C10DCE1-CE55-4CB0-8F95-00F9058C9613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C10DCE1-CE55-4CB0-8F95-00F9058C9613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C10DCE1-CE55-4CB0-8F95-00F9058C9613}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
