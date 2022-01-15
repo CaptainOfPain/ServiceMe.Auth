@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlaygroundShared.Application.CQRS;
 using PlaygroundShared.Domain.Domain;
+using PlaygroundShared.Domain.DomainEvents;
 using PlaygroundShared.Domain.Shared;
+using PlaygroundShared.IntercontextCommunication;
 using ServiceMe.Auth.Application.Users.Commands;
 using ServiceMe.Auth.Application.Users.DTOs;
 using ServiceMe.Auth.Application.Users.Querying;
@@ -9,19 +12,24 @@ using ServiceMe.Auth.Web.Requests;
 
 namespace ServiceMe.Auth.Web.Controllers;
 
-[Route("api/{controller}")]
+[Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
     private readonly ICommandQueryDispatcherDecorator _commandQueryDispatcherDecorator;
     private readonly ICorrelationContext _correlationContext;
+    private readonly IDomainEventsManager _domainEventsManager;
+    private readonly IBusPublisher _busPublisher;
 
-    public UsersController(ICommandQueryDispatcherDecorator commandQueryDispatcherDecorator, ICorrelationContext correlationContext)
+    public UsersController(ICommandQueryDispatcherDecorator commandQueryDispatcherDecorator, ICorrelationContext correlationContext, IDomainEventsManager domainEventsManager, IBusPublisher busPublisher)
     {
         _commandQueryDispatcherDecorator = commandQueryDispatcherDecorator ?? throw new ArgumentNullException(nameof(commandQueryDispatcherDecorator));
         _correlationContext = correlationContext ?? throw new ArgumentNullException(nameof(correlationContext));
+        _domainEventsManager = domainEventsManager;
+        _busPublisher = busPublisher;
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
     {
         var command = new RegisterUserCommand(
@@ -38,11 +46,11 @@ public class UsersController : ControllerBase
             request.PhoneNumber);
 
         await _commandQueryDispatcherDecorator.DispatchAsync(command);
-
         return Ok();
     }
 
     [HttpPut]
+    [Authorize]
     public async Task<IActionResult> Update([FromBody] UpdateUserRequest request)
     {
         var command = new UpdateUserCommand(
@@ -56,11 +64,11 @@ public class UsersController : ControllerBase
             request.PhoneNumber
         );
         await _commandQueryDispatcherDecorator.DispatchAsync(command);
-
         return Ok();
     }
 
     [HttpPost("signIn")]
+    [AllowAnonymous]
     public async Task<IActionResult> SignIn([FromBody] SignInRequest request)
     {
         var query = new GetUserJwtQuery(request.EmailOrUserName, request.EmailOrUserName, request.Password);
@@ -70,6 +78,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> Get()
     {
         var query = new GetUserDetailsQuery(_correlationContext.CurrentUser.UserId.Value.Id);

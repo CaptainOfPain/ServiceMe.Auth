@@ -8,8 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="11.0.0" />
-      <PackageReference Include="PlaygroundShared.Infrastructure.Core" Version="1.0.3" />
-      <PackageReference Include="PlaygroundShared.Infrastructure.MongoDb" Version="1.0.3" />
+      <PackageReference Include="PlaygroundShared.Infrastructure.MongoDb" Version="1.0.10" />
     </ItemGroup>
 
     <ItemGroup>

@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="PlaygroundShared.Infrastructure.MongoDb" Version="1.0.3" />
+      <PackageReference Include="PlaygroundShared.Infrastructure.MongoDb" Version="1.0.10" />
     </ItemGroup>
 
     <ItemGroup>

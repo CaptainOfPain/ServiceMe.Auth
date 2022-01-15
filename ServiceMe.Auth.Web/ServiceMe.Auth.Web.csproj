@@ -10,10 +10,10 @@
         <PackageReference Include="Autofac" Version="6.3.0" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-        <PackageReference Include="PlaygroundShared.Application" Version="1.0.3" />
-        <PackageReference Include="PlaygroundShared.Configurations" Version="1.0.3" />
-        <PackageReference Include="PlaygroundShared.Infrastructure.MongoDb" Version="1.0.3" />
-        <PackageReference Include="PlaygroundShared.IntercontextCommunication.RabbitMq" Version="1.0.3" />
+        <PackageReference Include="PlaygroundShared.Api" Version="1.0.9" />
+        <PackageReference Include="PlaygroundShared.Application" Version="1.0.9" />
+        <PackageReference Include="PlaygroundShared.Configurations" Version="1.0.9" />
+        <PackageReference Include="PlaygroundShared.IntercontextCommunication.RabbitMq" Version="1.0.11" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
@@ -23,6 +23,14 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ServiceMe.Auth.Application\ServiceMe.Auth.Application.csproj" />
+      <ProjectReference Include="..\ServiceMe.Auth.Infrastructure.MongoDb\ServiceMe.Auth.Infrastructure.MongoDb.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="busConfig.json" />
+      <Resource Include="busConfig.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
