@@ -16,8 +16,11 @@ public class UserMappingProfile : Profile
 
         CreateMap<Address, AddressEntity>();
 
-        CreateMap<UserRole, UserRoleEntity>();
-        CreateMap<UserRoleEntity, UserRole>();
+        CreateMap<UserRole, UserRoleEntity>()
+            .ForMember(x => x.UserRoleType, opt => opt.MapFrom(x => (int)x.Type));
+        CreateMap<UserRoleEntity, UserRole>()
+            .ForMember(x => x.Type, opt => opt.MapFrom(x => (UserRoleType)x.UserRoleType));
+        
 
         CreateMap<AddressEntity, Address>()
             .ConstructUsing(x => new Address(x.Street, x.City, x.PostCode, x.Country));

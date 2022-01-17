@@ -5,5 +5,5 @@ namespace ServiceMe.Auth.Infrastructure.Persistence.Users;
 
 public class UserRoleEntity : BaseMongoEntity
 {
-    public UserRoleType UserRoleType { get; set; }
+    public int UserRoleType { get; set; }
 }

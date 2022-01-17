@@ -8,6 +8,7 @@ using PlaygroundShared.IntercontextCommunication;
 using ServiceMe.Auth.Application.Users.Commands;
 using ServiceMe.Auth.Application.Users.DTOs;
 using ServiceMe.Auth.Application.Users.Querying;
+using ServiceMe.Auth.Domain.Users;
 using ServiceMe.Auth.Web.Requests;
 
 namespace ServiceMe.Auth.Web.Controllers;
@@ -17,15 +18,11 @@ public class UsersController : ControllerBase
 {
     private readonly ICommandQueryDispatcherDecorator _commandQueryDispatcherDecorator;
     private readonly ICorrelationContext _correlationContext;
-    private readonly IDomainEventsManager _domainEventsManager;
-    private readonly IBusPublisher _busPublisher;
 
-    public UsersController(ICommandQueryDispatcherDecorator commandQueryDispatcherDecorator, ICorrelationContext correlationContext, IDomainEventsManager domainEventsManager, IBusPublisher busPublisher)
+    public UsersController(ICommandQueryDispatcherDecorator commandQueryDispatcherDecorator, ICorrelationContext correlationContext)
     {
         _commandQueryDispatcherDecorator = commandQueryDispatcherDecorator ?? throw new ArgumentNullException(nameof(commandQueryDispatcherDecorator));
         _correlationContext = correlationContext ?? throw new ArgumentNullException(nameof(correlationContext));
-        _domainEventsManager = domainEventsManager;
-        _busPublisher = busPublisher;
     }
 
     [HttpPost]
@@ -85,5 +82,15 @@ public class UsersController : ControllerBase
         var result = await _commandQueryDispatcherDecorator.DispatchAsync<GetUserDetailsQuery, UserDetailsDto>(query);
 
         return Ok(result);
+    }
+
+    [HttpPost("AddRole")]
+    [Authorize(Roles = nameof(UserRoleType.Admin))]
+    public async Task<IActionResult> AddRole([FromBody] AddRoleToUserRequest request)
+    {
+        var command = new AddUserRoleCommand(new AggregateId(request.UserId), request.UserRoleType);
+        await _commandQueryDispatcherDecorator.DispatchAsync(command);
+
+        return Ok();
     }
 }

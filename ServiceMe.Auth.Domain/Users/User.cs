@@ -54,10 +54,26 @@ public class User : BaseAggregateRoot
         }
 
         PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, 14);
+        
+        DomainEvent(UserPasswordChangedEvent.Create(this));
     }
 
     public bool VerifyPassword(string password)
         => BCrypt.Net.BCrypt.Verify(password, PasswordHash);
+
+    public void AddRole(UserRoleType userRoleType)
+    {
+        _roles.Add(new UserRole(Guid.NewGuid(), userRoleType));
+
+        DomainEvent(UserRolesUpdatedEvent.Create(this));
+    }
+
+    public void RemoveRole(UserRoleType userRoleType)
+    {
+        _roles.Remove(_roles.FirstOrDefault(x => x.Type == userRoleType));
+
+        DomainEvent(UserRolesUpdatedEvent.Create(this));
+    }
 
     public new void SetDependencies(IDomainEventsManager domainEventsManager,
         IPasswordPolicyFactory passwordPolicyFactory)

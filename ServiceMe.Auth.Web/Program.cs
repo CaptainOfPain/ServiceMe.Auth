@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PlaygroundShared.Api.Middlewares;
 using PlaygroundShared.Configurations;
+using ServiceMe.Auth.Web;
 using ServiceMe.Auth.Web.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -79,5 +80,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.UseCorrelationContextMiddleware();
+
+app.SeedDatabase();
 
 app.Run();
